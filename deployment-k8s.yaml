@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: analytics-service
-        image: 734842486567.dkr.ecr.us-east-2.amazonaws.com/analytics-service:latest
+        image: 734842486567.dkr.ecr.us-east-2.amazonaws.com/cmm707/analytics-service:latest
         env:
         - name: CLICKHOUSE_HOST
           value: http://clickhouse-analytics:8123
