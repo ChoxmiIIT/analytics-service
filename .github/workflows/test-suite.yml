@@ -1,0 +1,31 @@
+name: Run Solution Test Suite in Kubernetes
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-2
+
+      - name: Update kubeconfig
+        run: aws eks --region us-east-2 update-kubeconfig --name my-cluster
+
+      - name: Apply test suite job
+        run: kubectl apply -f tests/test-suite-job.yaml
+
+      - name: Wait for job completion
+        run: |
+          kubectl wait --for=condition=complete --timeout=300s job/solution-test-job
+
+      - name: Get test results
+        run: kubectl logs job/solution-test-job

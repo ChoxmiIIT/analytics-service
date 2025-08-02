@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: clickhouse-analytics
+spec:
+  selector:
+    matchLabels:
+      app: clickhouse-analytics
+  template:
+    metadata:
+      labels:
+        app: clickhouse-analytics
+    spec:
+      containers:
+      - name: clickhouse
+        image: clickhouse/clickhouse-server:latest
+        ports:
+        - containerPort: 8123
+        volumeMounts:
+        - name: clickhouse-storage
+          mountPath: /var/lib/clickhouse
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: clickhouse-storage
+        persistentVolumeClaim:
+          claimName: clickhouse-analytics-pvc
+      - name: initdb
+        configMap:
+          name: clickhouse-initdb

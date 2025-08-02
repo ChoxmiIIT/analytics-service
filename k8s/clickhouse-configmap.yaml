@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clickhouse-initdb
+  labels:
+    app: clickhouse-analytics
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS analyticsdb;
+    CREATE TABLE IF NOT EXISTS analyticsdb.analytics (
+        page_views UInt32,
+        clicks UInt32,
+        scroll_depth UInt32,
+        page_time Float32,
+        session_time Float32
+    ) ENGINE = MergeTree() ORDER BY tuple();
