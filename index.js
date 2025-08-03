@@ -17,7 +17,7 @@ const clickhouse = createClient({
   database: process.env.CLICKHOUSE_DB || 'analyticsdb'
 });
 
-app.post('/analytics', async (req, res) => {
+app.post('/analytics/analytics', async (req, res) => {
   const { page_views, clicks, scroll_depth, page_time, session_time } = req.body;
   try {
     await clickhouse.insert({
@@ -31,7 +31,7 @@ app.post('/analytics', async (req, res) => {
   }
 });
 
-app.get('/analytics', async (req, res) => {
+app.get('/analytics/analytics', async (req, res) => {
   try {
     const result = await clickhouse.query({
       query: 'SELECT * FROM analytics',
@@ -44,7 +44,7 @@ app.get('/analytics', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
+app.get('/analytics', (req, res) => {
     res.send('Welcome to the Analytics Service');
 });
 
