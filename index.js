@@ -44,4 +44,8 @@ app.get('/analytics', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the Analytics Service');
+});
+
 app.listen(5000, () => console.log('Analytics Service running on port 5000'));
