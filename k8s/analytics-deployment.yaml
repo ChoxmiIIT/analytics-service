@@ -18,9 +18,9 @@ spec:
         - name: CLICKHOUSE_HOST
           value: http://clickhouse-analytics:8123
         - name: CLICKHOUSE_USER
-          value: default
+          value: ludx
         - name: CLICKHOUSE_PASSWORD
-          value: ""
+          value: "ludx"
         - name: CLICKHOUSE_DB
           value: analyticsdb
         ports:
