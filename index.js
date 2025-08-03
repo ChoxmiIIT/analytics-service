@@ -3,6 +3,13 @@ const { createClient } = require('@clickhouse/client');
 const app = express();
 app.use(express.json());
 
+console.log('Analytics Service starting...', {
+  host: process.env.CLICKHOUSE_HOST || 'http://clickhouse-analytics:8123',
+  username: process.env.CLICKHOUSE_USER || 'default',
+  password: process.env.CLICKHOUSE_PASSWORD || '',
+  database: process.env.CLICKHOUSE_DB || 'analyticsdb'
+});
+
 const clickhouse = createClient({
   host: process.env.CLICKHOUSE_HOST || 'http://clickhouse-analytics:8123',
   username: process.env.CLICKHOUSE_USER || 'default',
