@@ -14,6 +14,11 @@ spec:
       containers:
       - name: clickhouse
         image: clickhouse/clickhouse-server:latest
+        command: ["/usr/bin/clickhouse-server"]
+        args:
+          - --config-file=/etc/clickhouse-server/config.xml
+          - --mysql_port=9004
+          - --mysql-allow-cleartext-password=1
         ports:
         - containerPort: 8123
           name: http
@@ -33,6 +38,12 @@ spec:
           mountPath: /var/lib/clickhouse
         - name: initdb
           mountPath: /docker-entrypoint-initdb.d
+        - name: config
+          mountPath: /etc/clickhouse-server/config.xml
+          subPath: config.xml
+        - name: config
+          mountPath: /etc/clickhouse-server/users.xml
+          subPath: users.xml
       volumes:
       - name: clickhouse-storage
         persistentVolumeClaim:
@@ -40,3 +51,6 @@ spec:
       - name: initdb
         configMap:
           name: clickhouse-initdb
+      - name: config
+        configMap:
+          name: clickhouse-direct-config
