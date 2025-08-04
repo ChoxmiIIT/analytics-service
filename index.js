@@ -37,7 +37,7 @@ async function saveToS3(data) {
     Bucket: process.env.S3_BUCKET_NAME,
     Key: 'analytics_data.csv',
     Body: data,
-    ContentType: "text/plain",
+    ContentType: "text/csv",
   };
 
   try {
