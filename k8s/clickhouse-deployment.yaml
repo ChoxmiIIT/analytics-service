@@ -33,8 +33,6 @@ spec:
           mountPath: /var/lib/clickhouse
         - name: initdb
           mountPath: /docker-entrypoint-initdb.d
-        - name: mysql-config
-          mountPath: /etc/clickhouse-server/config.d
       volumes:
       - name: clickhouse-storage
         persistentVolumeClaim:
@@ -42,6 +40,3 @@ spec:
       - name: initdb
         configMap:
           name: clickhouse-initdb
-      - name: mysql-config
-        configMap:
-          name: clickhouse-mysql-config
