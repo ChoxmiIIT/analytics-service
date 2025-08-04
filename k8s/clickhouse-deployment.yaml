@@ -34,9 +34,6 @@ spec:
         - name: clickhouse-config
           mountPath: /etc/clickhouse-server/config.xml
           subPath: config.xml
-        - name: clickhouse-config
-          mountPath: /etc/clickhouse-server/users.xml
-          subPath: users.xml
       volumes:
       - name: clickhouse-storage
         persistentVolumeClaim:
