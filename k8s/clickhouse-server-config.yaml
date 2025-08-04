@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: clickhouse-config
+  namespace: clickhouse
+data:
+  config.xml: |
+    <yandex>
+      <listen_host>::</listen_host>
+      <ports>
+        <mysql_port>9004</mysql_port>
+      </ports>
+    </yandex>
+  users.xml: |
+    <yandex>
+      <profiles>
+        <quicksight_profile>
+          <use_mysql_types_in_show_columns>1</use_mysql_types_in_show_columns>
+        </quicksight_profile>
+      </profiles>
+      <users>
+        <mysql_user>
+          <profile>quicksight_profile</profile>
+          <password_double_sha1_hex>5d341c421756332a94f818ee0faf57e3dd09d26a</password_double_sha1_hex>
+          <networks>
+            <ip>::/0</ip>
+          </networks>
+          <quota>default</quota>
+          <access_management>1</access_management>
+        </mysql_user>
+      </users>
+    </yandex>
