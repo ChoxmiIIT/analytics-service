@@ -16,6 +16,10 @@ spec:
         image: clickhouse/clickhouse-server:latest
         ports:
         - containerPort: 8123
+        - containerPort: 9004
+        env:
+        - name: CLICKHOUSE_MYSQL_PORT
+          value: "9004"
         volumeMounts:
         - name: clickhouse-storage
           mountPath: /var/lib/clickhouse
