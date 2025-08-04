@@ -20,6 +20,8 @@ spec:
         env:
         - name: CLICKHOUSE_MYSQL_PORT
           value: "9004"
+        - name: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
+          value: "1"
         volumeMounts:
         - name: clickhouse-storage
           mountPath: /var/lib/clickhouse
