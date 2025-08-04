@@ -26,14 +26,13 @@ spec:
           value: "9004"
         - name: CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT
           value: "1"
+        - name: CLICKHOUSE_MYSQL_ALLOW_PUBLIC_KEY_RETRIEVAL
+          value: "1"
         volumeMounts:
         - name: clickhouse-storage
           mountPath: /var/lib/clickhouse
         - name: initdb
           mountPath: /docker-entrypoint-initdb.d
-        - name: clickhouse-config
-          mountPath: /etc/clickhouse-server/config.xml
-          subPath: config.xml
       volumes:
       - name: clickhouse-storage
         persistentVolumeClaim:
