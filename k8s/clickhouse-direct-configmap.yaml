@@ -1,4 +1,3 @@
-
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12,24 +11,53 @@ data:
             <console>1</console>
         </logger>
         
+        <!-- Network ports -->
         <http_port>8123</http_port>
         <tcp_port>9000</tcp_port>
         <mysql_port>9004</mysql_port>
         
+        <!-- Listen on all interfaces -->
         <listen_host>0.0.0.0</listen_host>
+        <listen_host>::</listen_host>
         
-        <max_connections>4096</max_connections>
+        <!-- MySQL Protocol Configuration -->
+        <protocols>
+            <mysql>
+                <port>9004</port>
+                <allow_public_key_retrieval>1</allow_public_key_retrieval>
+            </mysql>
+        </protocols>
         
+        <!-- Storage paths -->
         <path>/var/lib/clickhouse/</path>
         <tmp_path>/var/lib/clickhouse/tmp/</tmp_path>
         <user_files_path>/var/lib/clickhouse/user_files/</user_files_path>
         
+        <!-- Include users configuration -->
         <users_config>users.xml</users_config>
         
+        <!-- Default settings -->
         <default_profile>default</default_profile>
         <default_database>default</default_database>
         
+        <!-- Important: Mark cache size -->
+        <mark_cache_size>5368709120</mark_cache_size>
+        <uncompressed_cache_size>8589934592</uncompressed_cache_size>
+        
+        <!-- Max connections -->
+        <max_connections>4096</max_connections>
+        <keep_alive_timeout>3</keep_alive_timeout>
+        <max_concurrent_queries>100</max_concurrent_queries>
+        
+        <!-- Timezone -->
         <timezone>UTC</timezone>
+        
+        <!-- Query log -->
+        <query_log>
+            <database>system</database>
+            <table>query_log</table>
+            <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+        </query_log>
     </clickhouse>
 
   users.xml: |
@@ -40,6 +68,7 @@ data:
                 <max_memory_usage>10000000000</max_memory_usage>
                 <use_uncompressed_cache>0</use_uncompressed_cache>
                 <load_balancing>random</load_balancing>
+                <readonly>0</readonly>
             </default>
         </profiles>
         
@@ -53,6 +82,17 @@ data:
                 <quota>default</quota>
                 <access_management>1</access_management>
             </default>
+            
+            <!-- Specific user for QuickSight -->
+            <quicksight>
+                <password>quicksight123</password>
+                <networks>
+                    <ip>::/0</ip>
+                </networks>
+                <profile>default</profile>
+                <quota>default</quota>
+                <access_management>1</access_management>
+            </quicksight>
         </users>
         
         <quotas>
