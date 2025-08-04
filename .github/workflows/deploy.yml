@@ -32,6 +32,8 @@ jobs:
         run: |
           kubectl apply -f k8s/clickhouse-pvc.yaml
           kubectl apply -f k8s/clickhouse-configmap.yaml
+          kubectl apply -f k8s/clickhouse-mysql-config.yaml
+          kubectl apply -f k8s/clickhouse-users-config.yaml
           kubectl apply -f k8s/clickhouse-service.yaml
           kubectl apply -f k8s/clickhouse-deployment.yaml
           kubectl apply -f k8s/analytics-service.yaml
