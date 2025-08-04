@@ -15,3 +15,6 @@ spec:
     - name: native
       port: 9004
       targetPort: 9004
+    - name: tcp
+      port: 9000
+      targetPort: 9000
