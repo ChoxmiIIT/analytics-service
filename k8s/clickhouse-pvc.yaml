@@ -5,7 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: ludx-gp3
+  storageClassName: lugx-gp3
   resources:
     requests:
       storage: 1Gi
