@@ -57,11 +57,11 @@ setInterval(async () => {
       format: 'JSONEachRow'
     });
     const data = await result.json();
-    // saveToS3(arrayToCSV(data))
-    //   .then(() => console.log("Data saved to S3 successfully"))
-    //   .catch(err => console.error("Failed to save data to S3:", err));
+    saveToS3(arrayToCSV(data))
+      .then(() => console.log("Data saved to S3 successfully"))
+      .catch(err => console.error("Failed to save data to S3:", err));
   console.log("Save analytics data to S3 every minute");
-}, 60000);
+}, 300000);
 
 app.post('/analytics/analytics', async (req, res) => {
   const { page_views, clicks, scroll_depth, page_time, session_time } = req.body;
