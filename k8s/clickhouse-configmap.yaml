@@ -7,6 +7,8 @@ metadata:
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS analyticsdb;
+    CREATE USER IF NOT EXISTS ludx IDENTIFIED WITH plaintext_password BY 'ludx';
+    GRANT ALL ON analyticsdb.* TO ludx;
     CREATE TABLE IF NOT EXISTS analyticsdb.analytics (
         page_views UInt32,
         clicks UInt32,
