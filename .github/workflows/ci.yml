@@ -1,0 +1,25 @@
+name: Analytics API Tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      BASE_URL: http://k8s-publicapps-d66fbff79d-1918535299.us-east-2.elb.amazonaws.com/analytics
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:ci
