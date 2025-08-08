@@ -9,7 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      BASE_URL: http://k8s-publicapps-d66fbff79d-1918535299.us-east-2.elb.amazonaws.com/analytics
+      BASE_URL: http://k8s-publicapps-d66fbff79d-1918535299.us-east-2.elb.amazonaws.com
     steps:
       - uses: actions/checkout@v4
 
